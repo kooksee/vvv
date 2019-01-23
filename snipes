@@ -1,0 +1,116 @@
+gopherjs
+webview
+vecty
+db(leveldb,boltdb,websocket,http)
+
+分词工具
+https://github.com/huichen/sego
+
+全文检索
+https://github.com/blevesearch/bleve
+https://github.com/blevesearch/blevex
+https://github.com/huichen/wukong
+https://github.com/blevesearch/beer-search
+https://github.com/etcd-io/bbolt
+https://github.com/tildeleb/hashland
+
+This package converts any file into managable Go source code. Useful for embedding binary data into a go program. The file data is optionally gzip compressed before being converted to a raw byte slice.
+https://github.com/go-bindata/go-bindata
+
+```
+// Inject controller
+w.Bind("counter", &Counter{w: w})
+
+// Inject CSS
+w.InjectCSS(string(MustAsset("js/styles.css")))
+
+// Inject Picodom.js
+w.Eval(string(MustAsset("js/picodom/vendor/picodom.js")))
+// Inject app code
+w.Eval(string(MustAsset("js/picodom/app.js")))
+```
+
+1. 静态文件扫描，并生成嵌入式的文件
+2. 启动并加载
+```
+w := webview.New(webview.Settings{
+		Title: "Click counter: " + uiFrameworkName,
+	})
+	defer w.Exit()
+
+	w.Dispatch(func() {
+		// Inject controller
+		w.Bind("counter", &Counter{})
+
+		// Inject CSS
+		w.InjectCSS(string(MustAsset("js/styles.css")))
+
+		// Inject web UI framework and app UI code
+		loadUIFramework(w)
+	})
+	w.Run()
+```
+
+3. 嵌入式文件启动
+```
+var indexHTML = `
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	</head>
+	<body>
+	  <h1>Hello, world</h1>
+	</body>
+</html>
+`
+
+1. 先进行js编译打包,然后，把所有的js代码，以及css代码，和附加的第三方js代码一块assert到go代码中
+2. 使用webview加载css，加载js，绑定db并加载html页面
+3. 实时调试，通过
+
+localStorage
+https://github.com/go-humble/locstor
+https://github.com/gernest/locstor
+
+https://github.com/go-humble/form
+https://github.com/go-humble/detect
+https://github.com/albrow/forms
+```
+
+
+function rpcCall(service,data,callback) {
+    external.invoke(JSON.stringify({
+        service:service,
+        data:data,
+        callback:callback
+    }));
+}
+
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<style>* { margin: 0; padding: 0; box-sizing: border-box; }</style>
+	</head>
+	<body>
+		<button onclick="test()">ddd</button>
+		<script type="text/javascript">
+			var __rpcmap={};
+			__rpcmap["test1"]=function(d) {
+					console.log(d);
+			};
+			__rpcmap["test2"]=function(d) {
+					console.log("ssss");
+			};
+
+			function test() {
+				console.log("hello");
+				rpcCall("hello","test","test2");
+
+				rpcCall("hello","test","test1");
+			}
+		</script>
+	</body>
+</html>
+
+js-wrappers/marked/marked.go
