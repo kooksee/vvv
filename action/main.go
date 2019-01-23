@@ -5,7 +5,7 @@ import (
 	"github.com/dave/flux"
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
-	"github.com/gopherjs/vecty/prop"
+	"github.com/kooksee/vvv/router"
 	"strings"
 )
 
@@ -15,26 +15,10 @@ func main() {
 	app.AddStore(NewEditorStore())
 
 	// 添加路由
-	app.AddRoute("/", &MainView{store: NewEditorStore()})
-	app.NotFoundHandler(&notFound{})
-
-	app.Run("test main")
-}
-
-type notFound struct {
-	vecty.Core
-}
-
-func (nf *notFound) Render() vecty.ComponentOrHTML {
-	return elem.Div(
-		vecty.Markup(prop.ID("home-view")),
-		elem.Div(
-			vecty.Markup(prop.ID("home-top")),
-			elem.Heading1(
-				vecty.Text("page not found 🤦🏻‍♂️"),
-			),
-		),
-	)
+	app.AddRoute("/", func(ctx *router.Context) {
+		vecty.RenderBody(&MainView{store: NewEditorStore()})
+	})
+	app.Start()
 }
 
 func NewEditorStore() *EditorStore {
